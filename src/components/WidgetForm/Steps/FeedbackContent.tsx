@@ -10,6 +10,7 @@ const minCharactersNumberForComment = 3;
 export default function FeedbackContent({
   feedbackType,
   onFeedbackRestartRequest,
+  onFeedbackSent,
 }: FeedbackContentStepProps) {
   const [screenshot, setScreenshot] = useState<string | null>(null);
   const [comment, setComment] = useState("");
@@ -18,6 +19,7 @@ export default function FeedbackContent({
   const handleSubmitFeedback = (event: FormEvent) => {
     event.preventDefault();
     console.log({ screenshot, comment });
+    onFeedbackSent();
   };
 
   return (

@@ -9,9 +9,14 @@ export interface FeedbackTypeStepProps {
 export interface FeedbackContentStepProps {
   feedbackType: FeedbackType;
   onFeedbackRestartRequest: () => void;
+  onFeedbackSent: () => void;
 }
 
 export interface ScreenshotButtonProps {
   screenshot: string | null;
   onScreenshotTook: (screenshot: string | null) => void;
+}
+
+export interface FeedbackSucessStepProps {
+  onFeedbackRestartRequest: () => void;
 }
