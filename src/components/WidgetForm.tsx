@@ -1,10 +1,5 @@
 import CloseButton from "./CloseButton";
-
-const feedbackTypes = {
-  BUG: { title: "Problema" },
-  IDEA: { title: "Ideia" },
-  OTHER: { title: "Outro" },
-};
+import { feedbackTypesEntries } from "../constants/feedback-types";
 
 export default function WidgetForm() {
   return (
@@ -15,7 +10,12 @@ export default function WidgetForm() {
       </header>
       <p>Widget Form</p>
       <div className="flex py-8 gap-2 w-full">
-        <button></button>
+        {feedbackTypesEntries.map(([_key, { title, image }]) => (
+          <button>
+            <img src={image.source} alt={image.alt} />
+            <span>{title}</span>
+          </button>
+        ))}
       </div>
       <footer className="text-xs text-neutral-400">
         Feito com ♥ pela{" "}
