@@ -10,3 +10,8 @@ export interface FeedbackContentStepProps {
   feedbackType: FeedbackType;
   onFeedbackRestartRequest: () => void;
 }
+
+export interface ScreenshotButtonProps {
+  screenshot: string | null;
+  onScreenshotTook: (screenshot: string | null) => void;
+}
