@@ -2,7 +2,7 @@ import bugImageUrl from "../assets/bug.svg";
 import ideaImageUrl from "../assets/idea.svg";
 import thoughtImageUrl from "../assets/thought.svg";
 
-const feedbackTypes = {
+export const feedbackTypes = {
   BUG: {
     title: "Problema",
     image: { source: bugImageUrl, alt: "Imagem de um inseto" },
