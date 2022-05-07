@@ -12,7 +12,7 @@ const feedbackTypesEntries = Object.entries(feedbackTypes);
 export function Options() {
   return (
     <View style={styles.container}>
-      <Text>Deixe seu feedback</Text>
+      <Text style={styles.title}>Deixe seu feedback</Text>
       <View style={styles.options}>
         {feedbackTypesEntries.map(([key, value]) => (
           <Option key={key} title={value.title} image={value.image} />
