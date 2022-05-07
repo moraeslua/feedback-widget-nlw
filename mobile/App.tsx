@@ -9,7 +9,7 @@ import {
 } from "@expo-google-fonts/inter";
 import { View } from "react-native";
 import { theme } from "./src/theme";
-import { Widget } from "./src/components/Widget";
+import Widget from "./src/components/Widget";
 
 export default function App() {
   SplashScreen.preventAutoHideAsync();
