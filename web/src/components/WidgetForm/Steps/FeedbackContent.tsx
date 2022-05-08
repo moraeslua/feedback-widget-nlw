@@ -4,6 +4,7 @@ import { feedbackTypes } from "../../../constants/feedback";
 import { ArrowLeft } from "phosphor-react";
 import ScreenshotButton from "../ScreenshotButton";
 import { FormEvent, useState } from "react";
+import { api } from "../../../lib/api";
 
 const minCharactersNumberForComment = 3;
 
@@ -16,10 +17,18 @@ export default function FeedbackContent({
   const [comment, setComment] = useState("");
   const { title, image } = feedbackTypes[feedbackType];
 
-  const handleSubmitFeedback = (event: FormEvent) => {
+  const handleSubmitFeedback = async (event: FormEvent) => {
     event.preventDefault();
-    console.log({ screenshot, comment });
-    onFeedbackSent();
+    try {
+      await api.post("/feedbacks", {
+        type: feedbackType,
+        comment,
+        screenshot,
+      });
+      onFeedbackSent();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
