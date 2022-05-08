@@ -7,7 +7,7 @@ import {
   Inter_400Regular,
   Inter_500Medium,
 } from "@expo-google-fonts/inter";
-import { View } from "react-native";
+import { KeyboardAvoidingView, Platform, View } from "react-native";
 import { theme } from "./src/theme";
 import Widget from "./src/components/Widget";
 
@@ -25,7 +25,8 @@ export default function App() {
   SplashScreen.hideAsync();
 
   return (
-    <View
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={{
         flex: 1,
         backgroundColor: theme.colors.background,
@@ -33,6 +34,6 @@ export default function App() {
     >
       <StatusBar style="light" backgroundColor="transparent" translucent />
       <Widget />
-    </View>
+    </KeyboardAvoidingView>
   );
 }
