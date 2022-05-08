@@ -8,6 +8,7 @@ import { feedbackTypes } from "../../utils/feedbackTypes";
 import { ScreenshotButton } from "../ScreenshotButton";
 import { Button } from "../Button";
 import { captureScreen } from "react-native-view-shot";
+import { api } from "../../libs/api";
 
 interface Props {
   feedbackType: FeedbackType;
@@ -20,7 +21,9 @@ export function Form({
   onFeedbackCanceled,
   onFeedbackSent,
 }: Props) {
+  const [isSendingFeedback, setIsSendingFeedback] = useState(false);
   const [screenshot, setScreenshot] = useState<string | null>(null);
+  const [comment, setComment] = useState("");
   const feedbackTypeInfo = feedbackTypes[feedbackType];
 
   const handleTakeScreenshot = () => {
@@ -36,7 +39,22 @@ export function Form({
     setScreenshot(null);
   };
 
-  const handleSendFeedback = async () => {};
+  const handleSendFeedback = async () => {
+    if (isSendingFeedback) return;
+    setIsSendingFeedback(true);
+
+    try {
+      await api.post("/feedbacks", {
+        type: feedbackType,
+        screenshot,
+        comment,
+      });
+      onFeedbackSent();
+    } catch (error) {
+      console.log(error);
+      setIsSendingFeedback(false);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -59,6 +77,7 @@ export function Form({
         placeholder="Conte com detalhes o que está acontecendo..."
         placeholderTextColor={theme.colors.text_secondary}
         autoCorrect={false}
+        onChangeText={setComment}
       />
       <View style={styles.footer}>
         <ScreenshotButton
@@ -66,7 +85,7 @@ export function Form({
           onRemoveShot={handleRemoveScreenshot}
           screenshot={screenshot}
         />
-        <Button isLoading={false} onPress={onFeedbackSent} />
+        <Button isLoading={isSendingFeedback} onPress={handleSendFeedback} />
       </View>
     </View>
   );
